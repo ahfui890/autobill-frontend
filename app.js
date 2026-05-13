@@ -1,5 +1,9 @@
 const API_URL = "https://autobill-backend-n01b.onrender.com";
 
+// ============================================
+// 🛒 LOAD PRODUCTS
+// ============================================
+
 async function loadProducts() {
 
     try {
@@ -37,39 +41,59 @@ async function loadProducts() {
         document.getElementById("totalText").innerHTML =
             `CHECKOUT RM ${total}`;
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         console.log(err);
 
     }
 }
 
+// Auto refresh cart
 setInterval(loadProducts, 1500);
 
 loadProducts();
 
-async function checkout() {
+// ============================================
+// 💳 CHECKOUT
+// ============================================
+
+function checkout() {
 
     // Hide cart
     document.getElementById("home").style.display = "none";
 
-    // Hide button
-    document.querySelector("button").style.display = "none";
+    // Hide checkout button
+    document.getElementById("checkoutBtn").style.display = "none";
 
-    // Show QR
+    // Show QR section
     document.getElementById("qr-section").style.display = "block";
+}
 
-    // Wait 15 sec then clear
+// ============================================
+// ⏳ VERIFY PAYMENT
+// ============================================
+
+async function nextStep() {
+
+    // Hide next button
+    document.getElementById("nextBtn").style.display = "none";
+
+    // Show verifying text
+    document.getElementById("verifyingText").style.display = "block";
+
+    // Fake payment verification delay
     setTimeout(async () => {
 
-        // Hide QR
+        // Hide QR section
         document.getElementById("qr-section").style.display = "none";
 
-        // Show success
+        // Show thank you
         document.getElementById("success-message").style.display = "block";
 
         // Clear backend cart
         await axios.delete(`${API_URL}/clear`);
 
-    }, 15000);
+    }, 4000);
 }
