@@ -1,24 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>AutoBill Checkout</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
 
+    <!-- ========================================= -->
+    <!-- 🛒 TITLE -->
+    <!-- ========================================= -->
+
     <h1>🛒 AutoBill Checkout System</h1>
 
-    <!-- LIVE CART AREA -->
+    <!-- ========================================= -->
+    <!-- 📦 LIVE CART -->
+    <!-- ========================================= -->
+
     <div id="home"></div>
 
-    <!-- TOTAL + BUTTON -->
-    <h2 id="2">CHECKOUT $0</h2>
+    <!-- ========================================= -->
+    <!-- 💰 TOTAL -->
+    <!-- ========================================= -->
 
-    <button onclick="checkout()">Checkout</button>
+    <h2 id="totalText">CHECKOUT RM 0</h2>
+
+    <!-- ========================================= -->
+    <!-- 🧾 CHECKOUT BUTTON -->
+    <!-- ========================================= -->
+
+    <button onclick="checkout()">
+        Checkout
+    </button>
+
+    <!-- ========================================= -->
+    <!-- 💳 QR PAYMENT SECTION -->
+    <!-- ========================================= -->
+
+    <div id="qr-section">
+
+        <h2>📱 Scan To Pay</h2>
+
+        <!-- QR IMAGE -->
+        <img src="qr.jpg" id="qr-image">
+
+        <h3>Touch 'n Go eWallet</h3>
+
+        <p>
+            Scan this QR using:
+            <br>
+            Touch 'n Go / DuitNow / Banking Apps
+        </p>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- ✅ PAYMENT SUCCESS -->
+    <!-- ========================================= -->
+
+    <div id="success-message">
+
+        <h2>✅ Payment Completed</h2>
+
+        <p>Thank you for using AutoBill</p>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- 📚 SCRIPTS -->
+    <!-- ========================================= -->
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="app.js"></script>
 
 </body>
+
 </html>
