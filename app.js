@@ -80,20 +80,49 @@ async function nextStep() {
     // Hide next button
     document.getElementById("nextBtn").style.display = "none";
 
-    // Show verifying text
+    // Show verifying message
     document.getElementById("verifyingText").style.display = "block";
 
-    // Fake payment verification delay
+    // Fake payment verification
     setTimeout(async () => {
 
         // Hide QR section
         document.getElementById("qr-section").style.display = "none";
 
-        // Show thank you
+        // Show thank you message
         document.getElementById("success-message").style.display = "block";
 
         // Clear backend cart
         await axios.delete(`${API_URL}/clear`);
+
+        // ============================================
+        // ⏳ AFTER 1 SECOND RETURN TO MAIN PAGE
+        // ============================================
+
+        setTimeout(() => {
+
+            // Show cart again
+            document.getElementById("home").style.display = "flex";
+
+            // Show checkout button again
+            document.getElementById("checkoutBtn").style.display = "inline-block";
+
+            // Hide thank you message
+            document.getElementById("success-message").style.display = "none";
+
+            // Reset QR section
+            document.getElementById("qr-section").style.display = "none";
+
+            // Show next button again
+            document.getElementById("nextBtn").style.display = "inline-block";
+
+            // Hide verifying text
+            document.getElementById("verifyingText").style.display = "none";
+
+            // Reload products
+            loadProducts();
+
+        }, 1000);
 
     }, 4000);
 }
