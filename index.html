@@ -35,40 +35,45 @@
     <!-- 🧾 CHECKOUT BUTTON -->
     <!-- ========================================= -->
 
-    <button onclick="checkout()">
+    <button id="checkoutBtn" onclick="checkout()">
         Checkout
     </button>
 
     <!-- ========================================= -->
-    <!-- 💳 QR PAYMENT SECTION -->
+    <!-- 💳 QR SECTION -->
     <!-- ========================================= -->
 
     <div id="qr-section">
 
         <h2>📱 Scan To Pay</h2>
 
-        <!-- QR IMAGE -->
         <img src="qr.jpeg" id="qr-image">
 
         <h3>Touch 'n Go eWallet</h3>
 
         <p>
-            Scan this QR using:
-            <br>
-            Touch 'n Go / DuitNow / Banking Apps
+            Scan using banking apps or eWallet
         </p>
+
+        <!-- NEXT BUTTON -->
+        <button id="nextBtn" onclick="nextStep()">
+            Next
+        </button>
+
+        <!-- VERIFYING -->
+        <h3 id="verifyingText">
+            ⏳ Verifying Payment...
+        </h3>
 
     </div>
 
     <!-- ========================================= -->
-    <!-- ✅ PAYMENT SUCCESS -->
+    <!-- ✅ THANK YOU -->
     <!-- ========================================= -->
 
     <div id="success-message">
 
-        <h2>✅ Payment Completed</h2>
-
-        <p>Thank you for using AutoBill</p>
+        <h1>✅ Thank You For Shopping With Us</h1>
 
     </div>
 
