@@ -1,71 +1,75 @@
-// =============================
-// 🌐 RENDER API BASE URL
-// =============================
 const API_URL = "https://autobill-backend-n01b.onrender.com";
 
-// =============================
-// 📦 TRACK STATE
-// =============================
-let InitialCount = -1;
+async function loadProducts() {
 
-// =============================
-// 🔄 LOAD PRODUCTS (LIVE CART)
-// =============================
-const loadProducts = async () => {
     try {
+
         let res = await axios.get(`${API_URL}/cart`);
+
         let data = res.data;
 
         let products = data.cart;
+
         let total = data.grand_total;
 
-        // Prevent re-render if no new items
-        if (products.length <= InitialCount) return;
+        let home = document.getElementById("home");
 
-        let html = "";
+        home.innerHTML = "";
 
         products.forEach(product => {
-            html += `
-            <div class="card">
-                <h3>${product.label}</h3>
 
-                <p><b>Price:</b> $${product.price}</p>
-                <p><b>Quantity:</b> ${product.taken}</p>
-                <p><b>Total:</b> $${product.total}</p>
+            home.innerHTML += `
+
+            <div class="card">
+
+                <h2>${product.label}</h2>
+
+                <p>Price: RM ${product.price}</p>
+
+                <p>Total: RM ${product.total}</p>
+
             </div>
+
             `;
+
         });
 
-        document.getElementById("home").innerHTML = html;
-        document.getElementById("2").innerHTML = "CHECKOUT $" + total;
-
-        InitialCount = products.length;
+        document.getElementById("totalText").innerHTML =
+            `CHECKOUT RM ${total}`;
 
     } catch (err) {
-        console.log("Load error:", err);
-    }
-};
 
-// =============================
-// 🔁 AUTO REFRESH (LIVE MODE)
-// =============================
+        console.log(err);
+
+    }
+}
+
 setInterval(loadProducts, 1500);
 
-// =============================
-// 🧹 CHECKOUT FUNCTION
-// =============================
-const checkout = async () => {
-    try {
-        document.getElementById("2").innerHTML =
-            "<span>Processing Payment...</span>";
+loadProducts();
 
+async function checkout() {
+
+    // Hide cart
+    document.getElementById("home").style.display = "none";
+
+    // Hide button
+    document.querySelector("button").style.display = "none";
+
+    // Show QR
+    document.getElementById("qr-section").style.display = "block";
+
+    // Wait 15 sec then clear
+    setTimeout(async () => {
+
+        // Hide QR
+        document.getElementById("qr-section").style.display = "none";
+
+        // Show success
+        document.getElementById("success-message").style.display = "block";
+
+        // Clear backend cart
         await axios.delete(`${API_URL}/clear`);
 
-        alert("Payment Successful!");
-
-        location.reload();
-
-    } catch (err) {
-        console.log("Checkout error:", err);
-    }
-};
+    }, 15000);
+}
